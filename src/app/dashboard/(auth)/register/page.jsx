@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 const Register = () => {
 
-  const [err, setErr] = useState(false);
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -26,11 +26,16 @@ const Register = () => {
         }),
       });
 
-      res.status === 201 && router.push("/dashboard/login?success=Account has been created");
-    }catch(err){
-      setErr(false);
+      if(res.ok){
+        router.push("/dashboard/login?success=Account has been created");
+      }else{
+        setError(true);
+      }
+    }catch(error){
+      setError(true);
     }
   }
+
 
   return (
     <div className={styles.container}>
@@ -40,8 +45,8 @@ const Register = () => {
           <input type='password' placeholder='Password' className={styles.input} required />
           <button className={styles.button}>Register</button>
       </form>
-          {err && "Something went wrong, pls try again"}
           <Link href="/dashboard/login">Login with an existing account</Link>
+          {error && <p>User already exist!</p>}
     </div>
   )
 }
