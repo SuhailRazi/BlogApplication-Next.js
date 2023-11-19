@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "bcryptjs": "^2.4.3",
     "mongoose": "6.11.1",
     "next": "14.0.1",
